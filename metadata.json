@@ -1,0 +1,8 @@
+{
+  "name": "WhatsApp Partner Dashboard",
+  "description": "Embedded Sign up Flow for a Partnered Solution App to assign Credit Line via Gupshup and Meta.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
