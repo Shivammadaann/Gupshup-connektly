@@ -54,16 +54,18 @@ export default function App() {
     
     setLoading(true);
     setStatus('configuring');
-
-    const sessionInfoVersion = '3';
     
     let loginOptions: any = {
       response_type: 'code',
       override_default_response_type: true,
       extras: {
-        setup: {},
-        featureType: '',
-        sessionInfoVersion: sessionInfoVersion,
+        sessionInfoVersion: 3,
+        features: [
+          { name: 'marketing_messages_lite' },
+          { name: 'cloud_api' }
+        ],
+        version: 'v3',
+        setup: {}
       }
     };
 
