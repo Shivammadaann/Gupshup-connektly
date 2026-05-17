@@ -13,7 +13,7 @@ declare global {
 
 export default function App() {
   const [loading, setLoading] = useState(false);
-  const [config, setConfig] = useState<{ metaAppId: string; partnerId: string } | null>(null);
+  const [config, setConfig] = useState<{ metaAppId: string; partnerId: string; metaConfigId?: string } | null>(null);
   const [status, setStatus] = useState<'idle' | 'configuring' | 'success' | 'error'>('idle');
   const [errorMsg, setErrorMsg] = useState('');
   const [onboardingData, setOnboardingData] = useState<any>(null);
@@ -57,6 +57,24 @@ export default function App() {
     // Config according to WhatsApp Embedded Signup docs
     const sessionInfoVersion = '3';
     
+    let loginOptions: any = {
+      response_type: 'code',
+      override_default_response_type: true,
+      extras: {
+        setup: {},
+        featureType: '',
+        sessionInfoVersion: sessionInfoVersion,
+      }
+    };
+
+    if (config?.metaConfigId) {
+      loginOptions.config_id = config.metaConfigId;
+    } else {
+      // Fallback for missing config ID
+      loginOptions.scope = 'whatsapp_business_messaging,whatsapp_business_management,business_management';
+      delete loginOptions.extras;
+    }
+    
     window.FB.login(
       function (response: any) {
         if (response.authResponse) {
@@ -64,19 +82,10 @@ export default function App() {
           handleOnboardingCode(code);
         } else {
           setLoading(false);
-          setErrorMsg("User cancelled login or didn't authorize fully.");
+          setErrorMsg("User cancelled login or didn't authorize fully. Please ensure your Meta App ID, Allowed Domains, and Configuration ID are properly set up.");
         }
       },
-      {
-        config_id: 'YOUR_CONFIG_ID_HERE', // Needs to be replaced with the actual config id if used
-        response_type: 'code',
-        override_default_response_type: true,
-        extras: {
-          setup: {},
-          featureType: '',
-          sessionInfoVersion: sessionInfoVersion,
-        }
-      }
+      loginOptions
     );
   };
 

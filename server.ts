@@ -115,6 +115,7 @@ app.get("/api/config", (req, res) => {
   res.json({
     metaAppId: META_APP_ID || "",
     partnerId: GUPSHUP_PARTNER_SOLUTION_ID || "",
+    metaConfigId: process.env.META_CONFIG_ID || "",
   });
 });
 
