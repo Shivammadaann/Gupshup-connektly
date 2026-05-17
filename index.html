@@ -6,23 +6,6 @@
     <title>WhatsApp Partner Dashboard</title>
   </head>
   <body>
-    <!-- Setup Facebook root for SDK -->
-    <div id="fb-root"></div>
-    <script>
-      window.fbAsyncInit = function() {
-        // Will initialize dynamically from App.tsx once we fetch config
-        window.fbLoaded = true;
-        // dispatch event
-        window.dispatchEvent(new Event('fbLoaded'));
-      };
-      (function(d, s, id) {
-          var js, fjs = d.getElementsByTagName(s)[0];
-          if (d.getElementById(id)) return;
-          js = d.createElement(s); js.id = id;
-          js.src = "https://connect.facebook.net/en_US/sdk.js";
-          fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));
-    </script>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
