@@ -11,7 +11,7 @@ declare global {
   }
 }
 
-export default fu38fda4f3f7d546b0dc22c615af7d36b8nction App() {
+export default function App() {
   const [loading, setLoading] = useState(false);
   const [config, setConfig] = useState<{ metaAppId: string; partnerId: string } | null>(null);
   const [status, setStatus] = useState<'idle' | 'configuring' | 'success' | 'error'>('idle');
